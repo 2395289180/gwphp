@@ -8,8 +8,9 @@
 function __autoload($classname){
 	
 	if(strpos($classname,"Controller")){
+	
+		$controller = dirname(SERVER_ROOT).APP_PATH."/controllers/".$classname.".class.php";
 		
-		$controller = SERVER_ROOT."/controllers/".$classname.".class.php";
 		if(file_exists($controller)){
 			
 			include_once($controller);
@@ -18,7 +19,7 @@ function __autoload($classname){
 		
 	}elseif(strpos($classname,"Model")){
 		
-		$model = SERVER_ROOT."/models/".$classname.".php";
+		$model = dirname(SERVER_ROOT).APP_PATH."/models/".$classname.".php";
 		if(file_exists($model)){
 			
 			include_once($model);
@@ -47,12 +48,12 @@ if($request!=""){
 	}
 	if(!empty($url_arr)){
 		
-		$new_obj = ucfirst($url_arr["c"])."Controller";
+		$new_obj = ucfirst($url_arr[$config['c']])."Controller";
 
 		if(class_exists($new_obj)){
 			
 			$obj = new $new_obj();
-			$obj -> $url_arr["a"]();
+			$obj -> $url_arr[$config['a']]();
 			
 		}else{
 			
