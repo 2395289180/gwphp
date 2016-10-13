@@ -8,18 +8,22 @@
 function __autoload($classname){
 	
 	if(strpos($classname,"Controller")){
-	
-		$controller = dirname(SERVER_ROOT).APP_PATH."/controllers/".$classname.".class.php";
+		//echo $_GET["m"];
+		$controller = dirname(SERVER_ROOT).APP_PATH."/".MODEL_BOX."/controllers/".$classname.".class.php";
 		
 		if(file_exists($controller)){
 			
 			include_once($controller);
 			
+		}else{
+
+			die("这个地址不存在");
+
 		}
 		
 	}elseif(strpos($classname,"Model")){
 		
-		$model = dirname(SERVER_ROOT).APP_PATH."/models/".$classname.".php";
+		$model = dirname(SERVER_ROOT).APP_PATH."/".MODEL_BOX."/models/".$classname.".php";
 		if(file_exists($model)){
 			
 			include_once($model);
