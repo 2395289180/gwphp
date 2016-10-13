@@ -51,19 +51,27 @@ if($request!=""){
 		
 	}
 	if(!empty($url_arr)){
-		
-		$new_obj = ucfirst($url_arr[$config['c']])."Controller";
+		if($url_arr[$config['m']]!=""){
 
-		if(class_exists($new_obj)){
-			
-			$obj = new $new_obj();
-			$obj -> $url_arr[$config['a']]();
-			
+			$new_obj = ucfirst($url_arr[$config['c']])."Controller";
+
+			if(class_exists($new_obj)){
+				
+				$obj = new $new_obj();
+				$obj -> $url_arr[$config['a']]();
+				
+			}else{
+				
+				die("没有这个类，这个类加载不成功");
+				
+			}
+
 		}else{
-			
-			die("没有这个类，这个类加载不成功");
-			
+
+			die("没有模块加载");
+
 		}
+		
 		
 	}else{
 		
